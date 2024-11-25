@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <!-- 設定響應式網頁的視窗設定 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理財分析小助手</title>
+    <!-- 引入 Bootstrap CSS 框架 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- 引入 jQuery 函式庫 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 引入 Bootstrap JavaScript 框架 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* 基本網頁樣式設定 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #2A606E; /* 深青色背景 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 設定高度為視窗高度 */
+        }
+        /* 主容器樣式 */
+        .container {
+            display: flex;
+            width: 600px;
+            height: 400px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); /* 陰影效果 */
+        }
+        /* 左側面板樣式 */
+        .left-panel {
+            background-color: #C7F3F1; /* 淺青色背景 */
+            width: 50%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 左側面板標題樣式 */
+        .left-panel h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        /* 左側面板段落樣式 */
+        .left-panel p {
+            margin-bottom: 40px;
+        }
+        /* Join us 文字樣式 */
+        .left-panel .join-us {
+            font-size: 24px;
+            color: #B4C5C4;
+        }
+        /* 右側面板樣式 */
+        .right-panel {
+            background-color: #F0F0F0; /* 淺灰色背景 */
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        /* 右側面板標題樣式 */
+        .right-panel h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        /* 表單標籤樣式 */
+        .right-panel label {
+            margin-bottom: 10px;
+            display: block;
+        }
+        /* 輸入框樣式 */
+        .right-panel input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        /* 按鈕樣式 */
+        .right-panel button {
+            padding: 10px;
+            background-color: #F6E68B; /* 淺黃色背景 */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 主要內容容器 -->
+    <div class="container">
+        <!-- 左側資訊面板 -->
+        <div class="left-panel">
+            <h1>理財分析小助手</h1>
+            <p>現在開始掌握股票</p>
+            <div class="join-us">join us</div>
+        </div>
+        <!-- 右側登入面板 -->
+        <div class="right-panel">
+            <h2>登入帳號</h2>
+            <!-- Google 登入按鈕 -->
+            <!-- 方法1：使用 onclick 事件 -->
+            <button onclick="window.location.href='/login'">
+                <img src="picture/google.png" alt="google圖示" style="width:10%; height: auto">以Google帳戶進行登入
+            </button>
+
+            <!-- 註解掉的傳統登入表單
+            <form>
+                <label for="username">帳號:</label>
+                <input type="text" id="username" name="username">
+                <label for="password">密碼:</label>
+                <input type="password" id="password" name="password">
+                <button type="submit" value="submit" style="position:relative; left: 75%;;">登入</button>
+            </form>
+            -->
+            <!-- 註解掉的跳轉按鈕
+            <button type="submit" value="submit" onclick="javascript:location.href='home_UI.html'">登入</button>
+            -->
+        </div>
+    </div>
+</body>
+</html>

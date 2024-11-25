@@ -1,0 +1,70 @@
+/* 頂部導航欄 */
+.container-fluid {
+    background-color: #D3D3D3;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 14px;
+    position: sticky;
+    top: 0;
+}
+
+/* 每個導航欄按鈕 */
+.container-fluid div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 搜尋框區域 */
+.search-bar {
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #D3D3D3;
+    border-radius: 20px;
+    text-align: center;
+    width: 80%;
+}
+
+.search-bar input {
+    width: 60%;
+    height: 40px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+}
+.search-bar button {
+    width: auto;
+    height: 40px;
+    font-size: 14px;
+    border-left: none;
+    border: 1px solid #ccc;
+}
+
+form.search-bar::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+/* 帳戶資訊區域 */
+.account-info {
+    background-color: #D3D3D3;
+    width: 60%;
+    margin: 10% auto 0 auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 10px;
+}
+/*使用者頭像*/
+.account-info img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border-radius: 50%;
+    border: 1px solid;
+}

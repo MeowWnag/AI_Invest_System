@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日股市</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Bootstrap 和 jQuery 的 JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../Css/Function.css">
+    <script src="../Function/Function.js"></script>
+    <style>
+        body {
+            background-color: #B0E0E6;
+        }
+
+        .stock-table {
+            margin: 20px auto 0 auto;
+            background-color: #FFFFFF;
+            border-radius: 10px;
+            padding: 10px;
+            width: 80%;
+        }
+        /*今日股市*/
+        .title{
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部導航欄 -->
+    <div class="container-fluid">
+        <div class="col-sm-2">
+            <img src="../picture/feedback.png" alt="近期公告" width="30">
+            <span>近期公告</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/breaking_news.png" alt="財政報表查詢" width="30">
+            <span>財政報表查詢</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/monitoring.png" alt="今日股市" width="30">
+            <span>今日股市</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/query_stats.png" alt="投資建議" width="30">
+            <span>投資建議</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/favorite.png" alt="我的最愛" width="30">
+            <span>我的最愛</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/person.png" alt="帳戶" width="30">
+            <span>帳戶</span>
+        </div>
+    </div>
+    <div class="title">
+        <h1 ><b>今日股市</b></h1>
+    </div>
+
+    <!-- 搜尋框  如果要做到按按鈕執行，就不能用form包住他-->
+    <div class="search-bar" action="/">
+        <input type="text" placeholder="搜尋股票名稱/代碼" name="search" id="search_name" >
+        <button type="submit" onclick="Search_stock()"><img src="../picture/search.png" alt="搜尋" style="width: 25%;"></button>
+    </div>
+
+<!-- 股票資料表格 -->
+<div class="stock-table">
+    <table class="table table-bordered text-center" id="stock_table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">加入我的最愛</th>
+                <th scope="col">股票名稱/代號</th>
+                <th scope="col">股價</th>
+                <th scope="col">漲跌</th>
+                <th scope="col">漲跌幅(%)</th>
+                <th scope="col">開盤</th>
+                <th scope="col">昨收</th>
+                <th scope="col">最高</th>
+                <th scope="col">最低</th>
+                <th scope="col">成交量(張)</th>
+                <th scope="col">時間</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>味全<br>1201.TW</td>
+                <td>18.45</td>
+                <td class="text-danger">▼ 0.25</td>
+                <td class="text-danger">-1.37%</td>
+                <td>18.25</td>
+                <td>18.20</td>
+                <td>18.45</td>
+                <td>18.15</td>
+                <td>1,167</td>
+                <td>14:30</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>味王<br>1203.TW</td>
+                <td>48.60</td>
+                <td class="text-success">▲ 1.05</td>
+                <td class="text-success">+2.11%</td>
+                <td>49.20</td>
+                <td>49.65</td>
+                <td>49.20</td>
+                <td>48.50</td>
+                <td>5</td>
+                <td>13:30</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>大成<br>1210.TW</td>
+                <td>51.90</td>
+                <td class="text-danger">▼ 0.20</td>
+                <td class="text-danger">-0.39%</td>
+                <td>51.70</td>
+                <td>51.70</td>
+                <td>52.00</td>
+                <td>51.50</td>
+                <td>661</td>
+                <td>14:30</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>大飲<br>1213.TW</td>
+                <td>12.00</td>
+                <td>0.00</td>
+                <td>0.00%</td>
+                <td>12.00</td>
+                <td>12.00</td>
+                <td>12.00</td>
+                <td>11.90</td>
+                <td>38</td>
+                <td>13:30</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>卜蜂<br>1215.TW</td>
+                <td>96.80</td>
+                <td class="text-success">▲ 0.50</td>
+                <td class="text-success">+0.51%</td>
+                <td>97.30</td>
+                <td>97.30</td>
+                <td>97.30</td>
+                <td>96.80</td>
+                <td>329</td>
+                <td>13:30</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+</body>
+</html>

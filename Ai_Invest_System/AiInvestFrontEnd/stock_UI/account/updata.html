@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帳戶資訊頁面</title>
+    <link rel="stylesheet" href="../Css/Function.css">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #B0E0E6;
+        }
+
+
+        .input_box{
+            background-color: #F6E68B;
+            height: 24px;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 頂部導航欄 -->
+    <div class="container-fluid">
+        <div class="col-sm-2">
+            <img src="../picture/feedback.png" alt="近期公告" width="30">
+            <span>近期公告</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/breaking_news.png" alt="財政報表查詢" width="30">
+            <span>財政報表查詢</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/monitoring.png" alt="今日股市" width="30">
+            <span>今日股市</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/query_stats.png" alt="投資建議" width="30">
+            <span>投資建議</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/favorite.png" alt="我的最愛" width="30">
+            <span>我的最愛</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/person.png" alt="帳戶" width="30">
+            <span>帳戶</span>
+        </div>
+    </div>
+
+    <!-- 帳戶資訊修改區域 -->
+    <div >
+        <div class="account-info">
+            <img class="account_head" src="../picture/person.png" alt="使用者頭像">
+            <button style="position: absolute; top:57%;left:22%; display:inline ">上傳照片</button>
+            <div style="margin-top: 15px;">
+                <label>名稱: </label>
+                <input type="text" class="input_box" value=""><br>
+                <label>帳戶:</label>
+                <input type="email" class="input_box" value=""><br>
+                <label>生日: </label>
+                <input type="date" value="2000-01-01"><br>
+                <label>性別: </label><br>
+                <input type="radio" name="gender" value="男">
+                <label for="gender">男</label>
+                <input type="radio" name="gender" value="女">
+                <label for="gender">女</label>
+                <input type="radio" name="gender" value="其他">
+                <label for="gender">其他</label>
+            </div>
+        </div>
+        <div class="text-center" style="margin: 10px;">
+            <button type="submit" class="btn btn-primary" style="position:relative; left: 25%;">儲存</button>
+            <button type="button" class="btn btn-secondary" style="position:relative; left: 26%;">取消</button>
+        </div>
+    </div>
+
+
+</body>
+</html>

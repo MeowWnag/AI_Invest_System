@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帳戶資訊頁面</title>
+    <link rel="stylesheet" href="../Css/Function.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #B0E0E6;
+        }
+
+        /* 底部按鈕區域 */
+        .container {
+            position: fixed;
+            left: 20%;
+        }
+
+        .containers a {
+            text-decoration: none;
+            color: black;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部導航欄 -->
+    <div class="container-fluid">
+        <div class="col-sm-2">
+            <img src="../picture/feedback.png" alt="近期公告" width="30">
+            <span>近期公告</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/breaking_news.png" alt="財政報表查詢" width="30">
+            <span>財政報表查詢</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/monitoring.png" alt="今日股市" width="30">
+            <span>今日股市</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/query_stats.png" alt="投資建議" width="30">
+            <span>投資建議</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/favorite.png" alt="我的最愛" width="30">
+            <span>我的最愛</span>
+        </div>
+        <div class="col-sm-2">
+            <img src="../picture/person.png" alt="帳戶" width="30">
+            <span>帳戶</span>
+        </div>
+    </div>
+
+    <!-- 帳戶資訊區域 -->
+    <div class="account-info">
+        <img class="account_head" src="../picture/person.png" alt="使用者頭像">
+        <div style="margin: 10px;">
+            <p>名稱: </p>
+            <p>登入帳戶: (mail之類的)</p>
+            <p>生日: </p>
+            <p>性別: </p>
+        </div>
+    </div>
+
+    <!-- 底部按鈕區域 -->
+    <div class="container" style="margin-right: 10px;">
+        <a href="#">近期活動 </a>
+        <a href="#">更新個人資料 </a>
+        <a href="#">變更帳戶 </a>
+    </div>
+
+</body>
+</html>
