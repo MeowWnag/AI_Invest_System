@@ -3,24 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>股票資訊</title>
-    <!-- 引入 Bootstrap CSS -->
+    <title>{{ stock_name }} - 股票資訊</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- 引入 Bootstrap 和 jQuery 的 JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
-        .stock-price {
-            font-size: 36px;
-            color: green;
-        }
-        .price-up {
-            color: green;
-        }
-        .price-down {
-            color: red;
-        }
         .highlight {
             font-size: 24px;
             font-weight: bold;
@@ -28,11 +16,6 @@
         .stock-summary {
             background-color: #f8f9fa;
             padding: 20px;
-            border-radius: 10px;
-        }
-        .self-select-list {
-            background-color: #f1f1f1;
-            padding: 10px;
             border-radius: 10px;
         }
         .chart {
@@ -44,17 +27,20 @@
     </style>
 </head>
 <body>
-
 <div class="container mt-4">
-    <!-- 搜尋和股票名稱 -->
     <div class="row">
         <div class="col-md-8">
-            <h2>味全 <span class="text-muted">1201</span></h2>
-            <div class="stock-price">18.05 <span class="price-down">▼ 0.15 (0.82%)</span></div>
-            <p>收盤 | 2024/10/15 13:30 更新</p>
+            <h2>{{ stock_name }} <span class="text-muted">{{ stock_code }}</span></h2>
+            <div class="{{ 'text-success' if price_change > 0 else 'text-danger' }}" style="font-size: 36px;">
+                {{ current_price }}
+                <span class="{{ 'text-success' if price_change > 0 else 'text-danger' }}">
+                    {{ '▲' if price_change > 0 else '▼' }} {{ price_change }} ({{ price_change_percent }}%)
+                </span>
+            </div>
+            <p>{{ last_update }} 更新</p>
         </div>
         <div class="col-md-4 text-right">
-            <button class="btn btn-primary">加入自選股</button>
+            <button class="btn btn-primary">獲取股票建議</button>
         </div>
     </div>
 
@@ -65,62 +51,31 @@
         </div>
         <div class="col-md-4">
             <div class="stock-summary">
-                <h5>即時行情</h5>
+                <h5>今日行情</h5>
                 <table class="table table-bordered">
                     <tr>
-                        <th>成交</th><td>18.05</td>
-                        <th>昨收</th><td>18.20</td>
+                        <th>成交</th><td>{{ current_price }}</td>
+                        <th>昨收</th><td>{{ previous_close }}</td>
                     </tr>
                     <tr>
-                        <th>開盤</th><td>18.10</td>
-                        <th>漲跌幅</th><td class="price-down">-0.82%</td>
+                        <th>開盤</th><td>{{ opening_price }}</td>
+                        <th>漲跌幅</th>
+                        <td class="{{ 'text-success' if price_change > 0 else 'text-danger' }}">
+                            {{ price_change_percent }}%
+                        </td>
                     </tr>
                     <tr>
-                        <th>最高</th><td>18.15</td>
-                        <th>最低</th><td>18.00</td>
+                        <th>最高</th><td>{{ high_price }}</td>
+                        <th>最低</th><td>{{ low_price }}</td>
                     </tr>
                     <tr>
-                        <th>成交量</th><td>644</td>
-                        <th>昨量</th><td>509</td>
+                        <th>成交量</th><td>{{ current_volume }}</td>
+                        <th>昨量</th><td>{{ previous_volume }}</td>
                     </tr>
                 </table>
-                <p>內盤: 425 (65.99%) 外盤: 219 (34.01%)</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- 自選股 -->
-    <div class="row">
-        <div class="col-md-4">
-            <h5>我的自選股</h5>
-            <div class="self-select-list">
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        元大滬深300正2
-                        <span class="badge badge-success badge-pill">+3.86%</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        元大台灣50反1
-                        <span class="badge badge-success badge-pill">+1.52%</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        中信中國高股息
-                        <span class="badge badge-success badge-pill">+2.89%</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        期街口布蘭特油
-                        <span class="badge badge-success badge-pill">+1.30%</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        中信中國50正2
-                        <span class="badge badge-success badge-pill">+5.76%</span>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
 </div>
-
-
 </body>
 </html>

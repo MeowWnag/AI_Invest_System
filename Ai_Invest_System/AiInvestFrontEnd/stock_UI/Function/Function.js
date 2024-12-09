@@ -1,22 +1,35 @@
 function Search_stock() {
-    // Declare variables
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("search_name");  // 搜尋框中的輸入
-    filter = input.value.toUpperCase();  // 將輸入轉換為大寫，方便比對
-    table = document.getElementById("stock_table");  // 找到表格
-    tr = table.getElementsByTagName("tr");  // 所有的表格行
-  
-    // Loop through all table rows, and hide those who don't match the search query
-    for (i = 1; i < tr.length; i++) {  // 跳過表頭（第0行）
-      td = tr[i].getElementsByTagName("td")[1];  // 搜尋第二個單元格（股票名稱/代號）
-      if (td) {
-        txtValue = td.textContent || td.innerText;  // 獲取單元格中的文本
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {  // 搜尋文本中是否包含輸入的值
-          tr[i].style.display = "";  // 顯示匹配的行
-        } else {
-          tr[i].style.display = "none";  // 隱藏不匹配的行
-        }
-      }
+    // 宣告變數
+    var input, filter, table, tr, td, i, j, txtValue;
+
+    // 取得搜尋框輸入值
+    input = document.getElementById("search_name");
+    filter = input.value.toUpperCase(); // 將輸入轉成大寫（不區分大小寫比對）
+
+    // 獲取表格和所有的行
+    table = document.getElementById("main_table");
+    if (!table) {
+        console.error("Error: 表格 'main_table' 不存在！");
+        return;
     }
-  }
-  
+    tr = table.getElementsByTagName("tr");
+
+    // 遍歷表格行，從第1行（忽略表頭）開始
+    for (i = 1; i < tr.length; i++) {
+        let rowMatch = false; // 預設行不匹配
+        td = tr[i].getElementsByTagName("td");
+
+        for (j = 0; j < td.length; j++) { // 遍歷每個單元格
+            if (td[j]) {
+                txtValue = td[j].textContent || td[j].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    rowMatch = true; // 若匹配則設為 true
+                    break;
+                }
+            }
+        }
+
+        // 根據是否匹配決定顯示或隱藏行
+        tr[i].style.display = rowMatch ? "" : "none";
+    }
+}
