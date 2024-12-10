@@ -2,6 +2,7 @@ import csv
 import os
 from django.shortcuts import render
 from datetime import datetime
+import stock_chart
 
 today_file = datetime.now().strftime('%Y%m%d')
 today = datetime.now().strftime('%Y/%m/%d')
@@ -50,3 +51,7 @@ def stock_detail(request, stock_code):
     except Exception as e:
         print(f"Error reading CSV: {e}")
     return render(request, 'stockHTML/stock_detail.html', stock_data)
+
+def stock_detail(request, stock_code):
+    chart_image = stock_chart.generate_chart()
+    return render(request, 'stockHTML/stock_detail.html', {'chart_image': chart_image})
