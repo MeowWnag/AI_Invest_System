@@ -1,11 +1,14 @@
 import pandas as pd
 from datetime import datetime
 from bs4 import BeautifulSoup
+import os
 
 today_time = datetime.today().strftime('%Y%m%d')
-data_path = "today_stock/stock_data"
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
 # 讀取 CSV 檔案
-csv_file = f'{data_path}/stocks_{today_time}.csv' 
+csv_file = os.path.abspath(f'{script_dir}/stock_data/stocks_{today_time}.csv') 
+print("路徑",csv_file)
 df = pd.read_csv(csv_file)
 print(f"CSV file path: {csv_file}")
 

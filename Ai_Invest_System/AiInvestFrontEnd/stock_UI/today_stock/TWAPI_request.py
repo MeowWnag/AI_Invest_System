@@ -4,6 +4,8 @@ import json
 import pandas as pd  
 from datetime import datetime
 import os
+import schedule
+import time
 
 # 定義API的URL
 url = 'https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL'  
@@ -52,20 +54,31 @@ data = [2323, 2349, 2374, 2393, 2406, 2409, 2466, 2486, 2489, 3008, 3019, 3049, 
 ,2301, 2324, 2331, 2352, 2353, 2356, 2357, 2362, 2365, 2376, 2377, 2382, 2387, 2395, 2397, 2405, 2417, 2465, 2495, 3005, 3013, 3017, 3022, 3088, 3211, 3231, 3416, 3479, 3483, 3515, 3611, 3693, 3701, 3706, 3712, 4938, 5258, 5289, 5474, 6117, 6121, 6166, 6188, 6206, 6230, 6235, 6277, 6414, 6577, 6579, 6669, 6928, 6933, 8050, 8076, 8114, 8163, 8210, 8234
 ,1201, 1203, 1210, 1215, 1216, 1218, 1225, 1227, 1229, 1231, 1232, 1234, 1235, 1256, 1264, 1702, 1737, 4205]
 
-data_str = [str(code) for code in data]
+def job():
+    data_str = [str(code) for code in data]
+    
+    # 過濾符合條件的資料
+    df_filtered = df[df.index.isin(data_str)]
+    
+    # 將除了 "Name" 列以外的所有列轉換為浮點數
+    df_filtered[df_filtered.columns.difference(['Name'])] = df_filtered[df_filtered.columns.difference(['Name'])].astype(float)
+    
+    today = datetime.today().strftime('%Y%m%d')
+    output_dir = '/home/lab/AI_Invest_System/Ai_Invest_System/AiInvestFrontEnd/stock_UI/today_stock/stock_data'
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # 指定輸出檔案的路徑
+    output_path = os.path.join(output_dir, f'stocks_{today}.csv')
+    
+    # 將篩選後的數據保存為 CSV
+    df_filtered.to_csv(output_path, encoding='utf-8-sig')
 
-# 過濾符合條件的資料
-df = df[df.index.isin(data_str)]
+# 安排每週一至週五的 9 點到 13 點，每小時執行一次任務
+weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
+for day in weekdays:
+    for hour in range(9, 14):  # 9 點到 13 點（包含 13 點）
+        getattr(schedule.every(), day).at(f"{hour:02d}:00").do(job)
 
-# 將除了"Name"列以外的所有列轉換為浮點數
-df[df.columns.difference(['Name'])] = df[df.columns.difference(['Name'])].astype(float)
-
-today = datetime.today().strftime('%Y%m%d')
-output_dir = '/home/lab/AI_Invest_System/Ai_Invest_System/AiInvestFrontEnd/stock_UI/today_stock/stock_data'
-os.makedirs(output_dir, exist_ok=True)
-
-# 指定輸出檔案的路徑
-output_path = os.path.join(output_dir, f'stocks_{today}.csv')  # 檔案路徑
-
-# 將篩選後的數據保存為CSV
-df.to_csv(output_path, encoding='utf-8-sig')  # UTF-8 with BOM for Excel compatibility
+while True:
+    schedule.run_pending()
+    time.sleep(1)
