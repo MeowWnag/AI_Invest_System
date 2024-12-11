@@ -46,7 +46,7 @@ for index, row in df.iterrows():
     html_table += f'''
     <tr>
         <td><input type="checkbox"></td>
-        <td>{row['Name']}<br>{row['Code']}.TW</td>
+        <td><a href="/stock/{row['Code']}/">{row['Name']}<br>{row['Code']}.TW</a></td>
         <td>{row['TradeValue']}</td>
         <td class="{"text-danger" if row['Change'] > 0 else "text-success"}">{row['Change']}</td>
         <td>{row['OpeningPrice']}</td>
