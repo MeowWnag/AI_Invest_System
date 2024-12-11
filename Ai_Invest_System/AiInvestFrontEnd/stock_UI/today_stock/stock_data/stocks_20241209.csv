@@ -1,4 +1,4 @@
-Code,Name,TradeVolume,TradeValue,OpeningPrice,HighestPrice,LowestPrice,ClosingPrice,Change,Transaction
+﻿Code,Name,TradeVolume,TradeValue,OpeningPrice,HighestPrice,LowestPrice,ClosingPrice,Change,Transaction
 1101,台泥,4995779.0,167754329.0,33.6,33.7,33.45,33.7,0.1,3902.0
 1102,亞泥,4202754.0,178565212.0,42.65,42.7,42.25,42.7,0.25,2554.0
 1103,嘉泥,96082.0,1725201.0,18.1,18.1,17.9,17.9,-0.2,181.0
