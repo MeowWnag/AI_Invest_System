@@ -1,21 +1,24 @@
 import pandas as pd
 from datetime import datetime
 from bs4 import BeautifulSoup
+import os
 
 today_time = datetime.today().strftime('%Y%m%d')
-data_path = "today_stock/stock_data"
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
 # 讀取 CSV 檔案
-csv_file = f'{data_path}/stocks_{today_time}.csv' 
+csv_file = os.path.abspath(f'{script_dir}/stock_data/stocks_{today_time}.csv') 
+
 df = pd.read_csv(csv_file)
 print(f"CSV file path: {csv_file}")
 
 # 讀取現有的 HTML 模板文件
-stock_table = 'C:today_stock/today_stock.html'
-with open(stock_table, 'r', encoding='utf-8') as file:
+stockHTML = os.path.abspath(f'{script_dir}/today_stock.html') 
+with open(stockHTML, 'r', encoding='utf-8') as file:
     template_content = BeautifulSoup(file, "html.parser")
 
 div = template_content.find("div", class_="stock_table")
-print(f"HTML template path: {stock_table}")
+print(f"HTML template path: {stockHTML}")
 
 
 # 創建 HTML 表格標題
@@ -70,14 +73,9 @@ if div:
 else:
     print("Error: <div class='stock_table'> not found.")
 
-
-
-
-# 儲存更新後的 HTML 到新文件
-output_html_file = "today_stock/today_stock.html"
     
 # 寫回 HTML 文件
-with open("today_stock/today_stock.html", "w", encoding="utf-8") as file:
+with open(stockHTML, "w", encoding="utf-8") as file:
     file.write(str(template_content))
     
-print(f"HTML file has been saved as {output_html_file}")
+print(f"HTML file has been saved as {stockHTML}")
