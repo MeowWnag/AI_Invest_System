@@ -60,9 +60,9 @@ df = df[df.index.isin(data_str)]
 # 將除了"Name"列以外的所有列轉換為浮點數
 df[df.columns.difference(['Name'])] = df[df.columns.difference(['Name'])].astype(float)
 
-today = datetime.today().strftime('%Y%m%d')  
-output_dir = 'today_stock/stock_data'  # 目錄名稱
-os.makedirs(output_dir, exist_ok=True)  # 如果目錄不存在則創建
+today = datetime.today().strftime('%Y%m%d')
+output_dir = '/home/lab/AI_Invest_System/Ai_Invest_System/AiInvestFrontEnd/stock_UI/today_stock/stock_data'
+os.makedirs(output_dir, exist_ok=True)
 
 # 指定輸出檔案的路徑
 output_path = os.path.join(output_dir, f'stocks_{today}.csv')  # 檔案路徑
