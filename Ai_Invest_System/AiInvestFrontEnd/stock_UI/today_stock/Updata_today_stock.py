@@ -8,6 +8,7 @@ today_time = datetime.today().strftime('%Y%m%d')
 script_dir = os.path.dirname(os.path.abspath(__file__))
 # 讀取 CSV 檔案
 csv_file = os.path.abspath(f'{script_dir}/stock_data/stocks_{today_time}.csv') 
+print("成功讀取",csv_file)
 
 df = pd.read_csv(csv_file)
 print(f"CSV file path: {csv_file}")
