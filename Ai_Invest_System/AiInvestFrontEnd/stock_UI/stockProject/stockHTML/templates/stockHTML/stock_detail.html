@@ -31,9 +31,9 @@
     <div class="row">
         <div class="col-md-8">
             <h2>{{ stock_name }} <span class="text-muted">{{ stock_code }}</span></h2>
-            <div class="{% if price_change > 0 %}text-success{% else %}text-danger{% endif %}" style="font-size: 36px;">
+            <div class="{% if price_change > 0 %}text-danger{% else %}text-success{% endif %}" style="font-size: 36px;">
                 {{ current_price }}
-                <span class="{% if price_change > 0 %}text-success{% else %}text-danger{% endif %}">
+                <span class="{% if price_change > 0 %}text-danger{% else %}text-success{% endif %}">
                     {% if price_change > 0 %}▲{% else %}▼{% endif %} {{ price_change }} 
                 </span>
             </div>
@@ -49,6 +49,7 @@
         <div class="col-md-8">
             <img src="data:image/png;base64,{{ chart_image }}" alt="走勢圖">
         </div>
+        
         <div class="col-md-4">
             <div class="stock-summary">
                 <h5>今日行情</h5>
@@ -60,7 +61,7 @@
                     <tr>
                         <th>開盤</th><td>{{ opening_price }}</td>
                         <th>漲跌</th>
-                        <td class="{% if price_change > 0 %}text-success{% else %}text-danger{% endif %}">
+                        <td class="{% if price_change > 0 %}text-danger{% else %}text-success{% endif %}">
                             {{ price_change}}
                         </td>
                     </tr>
