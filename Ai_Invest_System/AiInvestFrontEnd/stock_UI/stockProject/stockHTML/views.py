@@ -3,6 +3,7 @@ import os
 from django.shortcuts import render
 from datetime import datetime
 import stock_chart
+import traceback
 
 today_file = datetime.now().strftime('%Y%m%d')
 today = datetime.now().strftime('%Y/%m/%d')
