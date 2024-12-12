@@ -8,7 +8,8 @@
     <!-- 引入 Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- 引入 Bootstrap 和 jQuery 的 JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    {% comment %} <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 多了s是簡易版，沒有AJAX{% endcomment %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <link href="{% static 'Css/Function.css' %}" rel="stylesheet"/>
     <script src="{% static 'Function/Function.js' %}"></script>
@@ -22,6 +23,8 @@
             border-radius: 10px;
             padding: 10px;
             width: 80%;
+            max-height: 500px;  /* 設置最大高度 */
+            overflow-y: auto;  /* 開啟垂直滾動條 */
         }
         .title {
             padding: 10px;
@@ -70,7 +73,7 @@
 <!-- 股票資料表格 -->
 <div class="stock_table">
     <table class="table table-bordered text-center" id="main_table">
-        <thead class="thead_light" style="position: sticky; top: 10%;background-color:white">
+        <thead class="thead_light" style="position: sticky; top: 0;background-color:white">
         <tr>
             <th scope="col">加入我的最愛</th>
             <th scope="col">股票名稱/代碼</th>
@@ -84,23 +87,101 @@
             <th scope="col">時間</th>
         </tr>
         </thead>
-        <tbody>
-        {% for stock in stocks %}
-        <tr>
-            <td><input type="checkbox"/></td>
-            <td><a href="{% url 'stock_detail' stock_code=stock_code %}">{{ stock_name }}<br/>{{ stock_code }}.TW</a></td>
-            <td>{{ tradeValue }}</td>
-            <td class="text-{{ 'stock_color' }}">{{ price_change }}</td>
-            <td>{{ opening_price }}</td>
-            <td>{{ current_price }}</td>
-            <td>{{ high_price }}</td>
-            <td>{{ low_price }}</td>
-            <td>{{ current_volume }}</td>
-            <td>{{ last_update }}</td>
-        </tr>
-        {% endfor %}
-        </tbody>
+        <tbody id='stock_data'></tbody>
     </table>
 </div>
+<script>
+    let currentPage = 1;
+
+    // 載入股票資料
+    function loadStockData(page) {
+        $.ajax({
+            url: `/login/today_stock/get_today_stock_data/${page}/`,
+            method: 'GET',
+            success: function(response) {
+                if (response.stocks.length > 0) {
+                    response.stocks.forEach(stock => {
+                        $('#stock_data').append(`
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="${stock.stock_code}">${stock.stock_name}<br/>${stock.stock_code}.TW</a></td>
+                                <td>${stock.tradeValue}</td>
+                                <td class="text-${stock.stock_color}">${stock.price_change}</td>
+                                <td>${stock.opening_price}</td>
+                                <td>${stock.current_price}</td>
+                                <td>${stock.high_price}</td>
+                                <td>${stock.low_price}</td>
+                                <td>${stock.current_volume}</td>
+                                <td>${stock.last_update}</td>
+                            </tr>
+                        `);
+                    });
+                    currentPage++;
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
+    // 滾動檢測
+    $('.stock_table').on('scroll', function() {
+        if ($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
+            loadStockData(currentPage);
+        }
+    });
+
+    // 初始載入資料
+    loadStockData(currentPage);
+    // 搜尋股票資料
+    function Search_stock() {
+        // 取得搜尋框輸入值
+        var input = document.getElementById("search_name");
+        var searchTerm = input.value;  // 搜尋字串
+        if (searchTerm == ''){
+            location.reload()
+        }
+
+        // 清空現有的表格內容
+        $('#stock_data').empty();
+
+        // 發送 AJAX 請求到後端
+        $.ajax({
+            url: '/login/today_stock/search_stocks/',  // 後端處理搜尋請求的路徑
+            method: 'GET',
+            data: {
+                'search': searchTerm  // 傳送搜尋字串
+            },
+            success: function(response) {
+                if (response.stocks && response.stocks.length > 0) {
+                    // 當搜尋結果返回後，更新表格
+                    response.stocks.forEach(stock => {
+                        $('#stock_data').append(`
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td><a href="${stock.stock_code}">${stock.stock_name}<br/>${stock.stock_code}.TW</a></td>
+                                <td>${stock.tradeValue}</td>
+                                <td class="text-${stock.stock_color}">${stock.price_change}</td>
+                                <td>${stock.opening_price}</td>
+                                <td>${stock.current_price}</td>
+                                <td>${stock.high_price}</td>
+                                <td>${stock.low_price}</td>
+                                <td>${stock.current_volume}</td>
+                                <td>${stock.last_update}</td>
+                            </tr>
+                        `);
+                    });
+                } else {
+                    alert("沒有找到符合的資料");
+                }
+            },
+            error: function(error) {
+                console.error(error);
+                alert("搜尋時發生錯誤");
+            }
+        });
+    }
+</script>
 </body>
 </html>
