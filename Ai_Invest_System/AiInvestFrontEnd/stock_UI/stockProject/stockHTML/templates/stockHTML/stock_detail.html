@@ -41,7 +41,7 @@
             <p>{{ last_update }} 更新</p>
         </div>
         <div class="col-md-4 text-right">
-            <button class="btn btn-primary">獲取股票建議</button>
+            <button class="btn btn-primary" onclick="getStockRecommendation()">獲取股票建議</button>
         </div>
     </div>
 
@@ -80,6 +80,7 @@
         </div>
     </div>
 </div>
+<div class="suggest"></div>
 
     <script>
         $(document).ready(function () {
@@ -113,6 +114,21 @@
                 }
             });
         });
+        function getStockRecommendation() {
+            // 發送 API 請求來獲取股票建議
+            fetch('http://localhost:8964/generate_output')  // 假設你的 API 路徑是這樣
+                .then(response => response.json())
+                .then(data => {
+                    // 假設返回的 JSON 包含推薦結果，將建議顯示在 .suggest 這個 div 內
+                    const suggestionDiv = document.querySelector('.suggest');
+                    suggestionDiv.innerHTML = `<h4>股票建議:</h4><p>${data.recommendation}</p>`;
+                })
+                .catch(error => {
+                    console.error("獲取建議時發生錯誤：", error);
+                    alert("獲取建議時發生錯誤");
+                });
+        }
+        
     </script>
 
 </body>
